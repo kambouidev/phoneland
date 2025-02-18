@@ -21,7 +21,8 @@
     "paths": {
       "@/*": ["./src/*"],
       "@screens/*": ["./src/screens/*"],
-      "@providers/*": ["./src/providers/*"]
+      "@providers/*": ["./src/providers/*"],
+      "@globalHooks/*": ["./src/hooks/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
