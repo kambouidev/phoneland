@@ -12,7 +12,8 @@ const HomePage: FC = () => {
         onSearch: resetOffset,
         debounceTime: 500,
         initialValue: ''
-    }); const { data, isLoading } = useDevices(debouncedSearch, offset);
+    });
+    const { data, isLoading } = useDevices(debouncedSearch, offset);
 
     const devices = data || [];
     const totalResults = data?.length || 0;
@@ -36,7 +37,7 @@ const HomePage: FC = () => {
                 </p>
             </div>
 
-            <div className="flex-1 overflow-y-auto pb-20 scrollbar-custom">
+            <div className="flex-1 overflow-y-auto pb-20 scrollbar-transparent">
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
                     {devices.map((device, index) => (
                         <DeviceCard
