@@ -1,11 +1,17 @@
 "use client"
-import Image from "next/image";
-import { useState } from "react";
 import { IDevice } from "@/types";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { DevicePlaceholder } from "@/components/icons/DevicePlaceholder";
 
-export const DeviceCard = ({ basePrice, brand, imageUrl, name }: IDevice) => {
+export const DeviceCard = ({ id, basePrice, brand, imageUrl, name }: IDevice) => {
     const [imageError, setImageError] = useState(false);
+    const router = useRouter();
+
+    const handleClick = () => {
+        router.push(`/device/${id}`);
+    };
 
     const formatPrice = (price: number) => {
         return new Intl.NumberFormat('es-ES', {
@@ -15,7 +21,10 @@ export const DeviceCard = ({ basePrice, brand, imageUrl, name }: IDevice) => {
     };
 
     return (
-        <div className="flex flex-col h-full border relative group overflow-hidden">
+        <div
+            onClick={handleClick}
+            className="flex flex-col h-full border relative group overflow-hidden cursor-pointer"
+        >
             <div className="absolute inset-0 bg-black transform translate-y-full transition-transform duration-300 ease-in-out group-hover:translate-y-0 -z-10" />
 
             <div className="flex-1 flex items-center justify-center p-2 relative">
