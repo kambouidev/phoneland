@@ -1,4 +1,4 @@
-import { notFound } from 'next/navigation';
+import DeviceInfoPage from '@/screens/device';
 
 interface PhoneProps {
     params: {
@@ -6,12 +6,6 @@ interface PhoneProps {
     };
 }
 
-export default async function DeviceDetailsPage({ params }: PhoneProps) {
-    if (params.id === "phone-123") notFound()
-    return (
-        <div className="flex min-h-screen flex-col items-center p-24">
-            device id: {params.id}
-        </div>
-    );
-
+export default function DeviceDetailsPage({ params }: PhoneProps) {
+    return <DeviceInfoPage id={params.id} />;
 }
