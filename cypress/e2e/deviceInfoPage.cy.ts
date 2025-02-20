@@ -93,4 +93,35 @@ describe('Device Info Page', () => {
       }
     });
   });
+
+  it('should add the device to the cart and navigate to the cart page', () => {
+    cy.intercept('GET', '**/products*').as('getDevices');
+    cy.wait('@getDevices');
+    cy.intercept('GET', '**/products/*').as('getDevice');
+    cy.get('[data-cy="device-home-grid"]').children().first().click();
+
+    cy.wait('@getDevice').then((interception) => {
+      const response = interception.response?.body || [];
+      const firstDevice: IDeviceDetails = response;
+      cy.url().should('include', '/device/');
+      cy.get('[data-cy="device-info-page"]').should('be.visible');
+
+      cy.get('[data-cy="device-info-storage-options"] button').first().click();
+      cy.get('[data-cy="device-info-color-options"] button').first().click();
+
+      cy.get('[data-cy="device-info-add-to-cart-button"]').should('not.be.disabled').click();
+
+      cy.url().should('include', '/cart');
+
+      cy.get('[data-cy="cart-page"]').should('be.visible');
+
+      cy.get(`[data-cy^="cart-card-device-${firstDevice.id}"]`)
+        .should('be.visible')
+        .within(() => {
+          cy.get('[data-cy="cart-device-name"]').should('contain.text', firstDevice.name);
+          cy.get('[data-cy="cart-device-storage-color"]').should('contain.text', firstDevice.storageOptions[0].capacity);
+          cy.get('[data-cy="cart-device-price"]').should('contain.text', `${firstDevice.storageOptions[0].price} EUR`);
+        });
+    });
+  });
 });
