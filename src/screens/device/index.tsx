@@ -74,14 +74,14 @@ const DeviceInfoPage: FC<DeviceInfoPageProps> = ({ params }) => {
         notFound();
     }
     return (
-        <div className="w-full">
+        <div className="w-full" data-cy="device-info-page">
             <div className="flex-1 overflow-y-auto pb-12 h-[calc(100vh-64px)] scrollbar-transparent">
                 <div className="p-4 md:px-8 lg:px-12">
                     <BackButton />
 
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-10 sm:px-20">
-                    <div className="flex justify-center">
+                    <div className="flex justify-center" data-cy="device-info-image-container">
                         {selectedColor && !imageError ? (
 
                             <div className="relative w-[400px] h-[400px]">
@@ -93,6 +93,7 @@ const DeviceInfoPage: FC<DeviceInfoPageProps> = ({ params }) => {
                                     sizes="(max-width: 768px) 100px, 150px"
                                     className="object-contain"
                                     onError={() => setImageError(true)}
+                                    data-cy="device-info-image"
                                 />
                             </div>
                         ) : (
@@ -101,9 +102,9 @@ const DeviceInfoPage: FC<DeviceInfoPageProps> = ({ params }) => {
                     </div>
                     <div>
                         <div>
-                            <span className="font-normal uppercase">{device.brand}</span>
-                            <h1 className="text-3xl font-bold uppercase">{device.name}</h1>
-                            <p className="text-lg text-gray-600 uppercase">from {price} EUR</p>
+                            <span className="font-normal uppercase" data-cy="device-info-brand">{device.brand}</span>
+                            <h1 className="text-3xl font-bold uppercase" data-cy="device-info-name">{device.name}</h1>
+                            <p className="text-lg text-gray-600 uppercase" data-cy="device-info-price">from {price} EUR</p>
                         </div>
 
                         <StorageOptions options={device.storageOptions} selectedStorage={selectedStorage} onSelect={handleStorageSelect} />
@@ -113,6 +114,7 @@ const DeviceInfoPage: FC<DeviceInfoPageProps> = ({ params }) => {
                             className={`mt-6 w-full py-2 uppercase text-white transition-transform transform ${isAddToCartDisabled ? 'bg-gray-400 cursor-not-allowed' : 'bg-black hover:scale-105'}`}
                             disabled={isAddToCartDisabled}
                             onClick={handleAddToCart}
+                            data-cy="device-info-add-to-cart-button"
                         >
                             add to cart
                         </button>

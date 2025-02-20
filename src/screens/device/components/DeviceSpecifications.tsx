@@ -6,7 +6,7 @@ interface DeviceSpecificationsProps {
 
 const DeviceSpecifications: React.FC<DeviceSpecificationsProps> = ({ specs }) => {
     return (
-        <div className="mt-8 px-10 sm:px-20">
+        <div className="mt-8 px-10 sm:px-20" data-cy="device-info-specifications">
             <h2 className="text-2xl font-semibold uppercase">specifications</h2>
             <div className="grid grid-cols-1 border-t mt-2">
                 {Object.entries(specs).map(([key, value]) => (

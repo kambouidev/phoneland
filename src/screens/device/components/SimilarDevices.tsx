@@ -7,7 +7,7 @@ interface SimilarDevicesProps {
 
 const SimilarDevices: React.FC<SimilarDevicesProps> = ({ devices }) => {
     return (
-        <div className="mt-8 pl-10 sm:pl-20">
+        <div className="mt-8 pl-10 sm:pl-20" data-cy="device-info-similar-devices">
             <h2 className="text-2xl font-semibold uppercase">similar items</h2>
             <div className="flex overflow-x-auto mt-4 scrollbar-custom pb-12">
                 {devices.map((product, index) => (
