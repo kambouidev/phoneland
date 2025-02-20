@@ -95,18 +95,21 @@ const DeviceInfoPage: FC<DeviceInfoPageProps> = ({ params }) => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-10 sm:px-20">
                     <div className="flex justify-center">
                         {selectedColor ? (
-                            <Image
-                                src={selectedColor.imageUrl}
-                                alt={device.name}
-                                width={400}
-                                height={400}
-                                className="object-contain"
-                            />
+
+                            <div className="relative w-[400] h-[400]">
+                                <Image
+                                    src={selectedColor.imageUrl}
+                                    alt={device.name}
+                                    fill
+                                    priority
+                                    sizes="(max-width: 768px) 100px, 150px"
+                                    className="object-contain"
+                                />
+                            </div>
                         ) : (
                             <DevicePlaceholder />
                         )}
                     </div>
-
                     <div>
                         <div>
                             <span className="font-normal uppercase">{device.brand}</span>

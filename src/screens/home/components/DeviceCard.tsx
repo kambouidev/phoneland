@@ -28,15 +28,17 @@ export const DeviceCard = ({ id, basePrice, brand, imageUrl, name }: IDevice) =>
             <div className="absolute inset-0 bg-black transform translate-y-full transition-transform duration-300 ease-in-out group-hover:translate-y-0 -z-10" />
 
             <div className="flex-1 flex items-center justify-center p-2 relative">
-                {!imageError ? (
+                {!imageError ? (<div className="relative w-[150px] h-[150px]">
                     <Image
                         src={imageUrl}
                         alt={name}
-                        width={150}
-                        height={150}
-                        className="object-contain max-h-[150px]"
+                        fill
+                        priority
+                        sizes="(max-width: 768px) 100px, 150px"
+                        className="object-contain"
                         onError={() => setImageError(true)}
                     />
+                </div>
                 ) : (
                     <DevicePlaceholder />
                 )}
