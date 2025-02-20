@@ -10,10 +10,13 @@ import { DeviceStorageOption } from "../../types";
 import { useCart } from "../../context/CartContext";
 
 interface DeviceInfoPageProps {
-    id: string;
+    params: {
+        id: string;
+    };
 }
 
-const DeviceInfoPage: FC<DeviceInfoPageProps> = ({ id }) => {
+const DeviceInfoPage: FC<DeviceInfoPageProps> = ({ params }) => {
+    const { id } = params;
     const { data: device, isLoading, error } = useGetDeviceDetails(id);
     const { addToCart } = useCart();
 
