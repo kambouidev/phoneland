@@ -1,0 +1,38 @@
+[
+    {
+      "brand": "Samsung",
+      "colorName": "Titanium Yellow",
+      "id": "SMG-S24U-1740089648319",
+      "imageUrl": "http://prueba-tecnica-api-tienda-moviles.onrender.com/images/SMG-S24U-titanium-yellow.png",
+      "name": "Galaxy S24 Ultra",
+      "price": 1229,
+      "storage": "256 GB"
+    },
+    {
+      "brand": "Apple",
+      "colorName": "Titanio Natural",
+      "id": "APL-I15PM-1740089658464",
+      "imageUrl": "http://prueba-tecnica-api-tienda-moviles.onrender.com/images/APL-I15PM-titanio-natural.png",
+      "name": "iPhone 15 Pro Max",
+      "price": 1699,
+      "storage": "1 TB"
+    },
+    {
+      "brand": "Apple",
+      "colorName": "Titanio Negro",
+      "id": "APL-I15PM-1740092586096",
+      "imageUrl": "http://prueba-tecnica-api-tienda-moviles.onrender.com/images/APL-I15PM-titanio-negro.png",
+      "name": "iPhone 15 Pro Max",
+      "price": 1699,
+      "storage": "1 TB"
+    },
+    {
+      "brand": "OPPO",
+      "colorName": "Ripple Blue",
+      "id": "OPP-A60-1740093062685",
+      "imageUrl": "http://prueba-tecnica-api-tienda-moviles.onrender.com/images/OPP-A60-ripple-blue.png",
+      "name": "A60",
+      "price": 179,
+      "storage": "256GB"
+    }
+  ]
