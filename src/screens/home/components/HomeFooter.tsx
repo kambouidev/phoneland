@@ -15,6 +15,7 @@ const HomeFooter: React.FC<FooterProps> = ({ handlePrevious, handleNext, isPrevi
                     onClick={handlePrevious}
                     disabled={isPreviousDisabled}
                     className={`px-4 py-2 border bg-background text-foreground disabled:opacity-50 transition-transform transform ${isPreviousDisabled ? '' : 'hover:scale-105'}`}
+                    data-cy="pagination-home-previous-button"
                 >
                     Previous
                 </button>
@@ -22,6 +23,7 @@ const HomeFooter: React.FC<FooterProps> = ({ handlePrevious, handleNext, isPrevi
                     onClick={handleNext}
                     disabled={isNextDisabled}
                     className={`px-4 py-2 border bg-background text-foreground disabled:opacity-50 transition-transform transform ${isNextDisabled ? '' : 'hover:scale-105'}`}
+                    data-cy="pagination-home-next-button"
                 >
                     Next
                 </button>

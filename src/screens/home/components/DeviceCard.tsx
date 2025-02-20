@@ -24,6 +24,7 @@ export const DeviceCard = ({ id, basePrice, brand, imageUrl, name }: IDevice) =>
         <div
             onClick={handleClick}
             className="flex flex-col h-full border relative group overflow-hidden cursor-pointer"
+            data-cy={`device-card-${id}`}
         >
             <div className="absolute inset-0 md:bg-black md:transform md:translate-y-full md:transition-transform md:duration-300 md:ease-in-out md:group-hover:translate-y-0 -z-10" />
 
@@ -47,11 +48,11 @@ export const DeviceCard = ({ id, basePrice, brand, imageUrl, name }: IDevice) =>
 
             <div className="flex items-end justify-between p-2 relative">
                 <div className="flex flex-col">
-                    <span className="text-xs font-extralight text-gray-500 uppercase transition-colors md:group-hover:text-white">{brand}</span>
-                    <span className="text-xs font-extralight truncate uppercase transition-colors md:group-hover:text-white">{name}</span>
+                    <span className="text-xs font-semibold text-gray-500 uppercase transition-colors md:group-hover:text-white">{brand}</span>
+                    <span className="text-xs font-bold truncate uppercase transition-colors md:group-hover:text-white">{name}</span>
                 </div>
                 <div>
-                    <span className="text-xs font-extralight uppercase transition-colors md:group-hover:text-white">
+                    <span className="text-xs font-bold uppercase transition-colors md:group-hover:text-white">
                         {formatPrice(basePrice)}
                     </span>
                 </div>
