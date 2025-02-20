@@ -27,7 +27,7 @@ const HomePage: FC = () => {
     const isNextDisabled = devices.length < 20;
 
     return (
-        <div className="p-4 md:px-8 lg:px-12 flex flex-col h-[calc(100vh-64px)]">
+        <div className="p-4 md:px-8 lg:px-12 flex flex-col h-[calc(100vh-20vh)] md:h-[calc(100vh-64px)]">
             <SearchBar
                 value={searchQuery}
                 onChange={handleSearch}
@@ -40,7 +40,7 @@ const HomePage: FC = () => {
                 </p>
             </div>
 
-            <div className="flex-1 overflow-y-auto pb-20 scrollbar-transparent">
+            <div className="flex-1 overflow-y-auto mb-20 scrollbar-transparent">
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
                     {devices.map((device, index) => (
                         <DeviceCard
