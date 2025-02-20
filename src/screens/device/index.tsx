@@ -7,6 +7,7 @@ import { DevicePlaceholder } from "../../components/icons/DevicePlaceholder";
 import Image from "next/image";
 import { DeviceCard } from "../home/components/DeviceCard";
 import { DeviceStorageOption } from "../../types";
+import { useCart } from "../../context/CartContext";
 
 interface DeviceInfoPageProps {
     id: string;
@@ -14,6 +15,8 @@ interface DeviceInfoPageProps {
 
 const DeviceInfoPage: FC<DeviceInfoPageProps> = ({ id }) => {
     const { data: device, isLoading, error } = useGetDeviceDetails(id);
+    const { addToCart } = useCart();
+
     const router = useRouter();
 
     const [price, setPrice] = useState<number>();
@@ -35,6 +38,19 @@ const DeviceInfoPage: FC<DeviceInfoPageProps> = ({ id }) => {
     const handleColorSelect = (imageUrl: string) => {
         setSelectedColor(imageUrl);
     };
+
+    const handleAddToCart = () => {
+        if (!device || !selectedColor || !selectedStorage || price === undefined) return;
+        addToCart({
+            brand: device.brand,
+            colorName: 'red',
+            id: device.id,
+            imageUrl: selectedColor,
+            name: device.name,
+            price,
+            storage: selectedStorage
+        })
+    }
 
     if (isLoading) {
         return <div>Cargando...</div>;
@@ -124,6 +140,7 @@ const DeviceInfoPage: FC<DeviceInfoPageProps> = ({ id }) => {
                         <button
                             className={`mt-6 w-full py-2 uppercase text-white ${isAddToCartDisabled ? 'bg-gray-400 cursor-not-allowed' : 'bg-black'}`}
                             disabled={isAddToCartDisabled}
+                            onClick={handleAddToCart}
                         >
                             add to cart
                         </button>
