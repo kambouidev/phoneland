@@ -1,5 +1,7 @@
-export default function CartPage() {
+import CartPage from "../../screens/cart";
+
+export default function Cart() {
     return (
-        <div>CART</div>
+        <CartPage />
     )
 }
