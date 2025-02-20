@@ -79,7 +79,7 @@ describe('Home Page', () => {
     cy.get('[data-cy="device-home-grid"]').children().first().find('.absolute').should('have.class', 'md:group-hover:translate-y-0');
   });
 
-  it.only('should display image, name, brand, and base price on device card', () => {
+  it('should display image, name, brand, and base price on device card', () => {
     cy.intercept('GET', '**/products*').as('getDevices');
     cy.get('[data-cy="search-home-input"]').type('iPhone');
     cy.wait('@getDevices').then((interception) => {
