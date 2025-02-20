@@ -32,7 +32,7 @@ const CartPage = () => {
                     </div>}
                     <div className="flex flex-row justify-between items-center gap-2">
                         <button
-                            className="px-4 py-2 border bg-white uppercase"
+                            className="px-4 py-2 border bg-white uppercase transition-transform transform hover:scale-105"
                             onClick={() => router.push("/")}
                         >
                             continue shopping
@@ -43,7 +43,7 @@ const CartPage = () => {
                                 <span className="text-lg font-semibold">{total} EUR</span>
                             </div>
                             <button
-                                className="px-14 py-2 border bg-background text-white uppercase"
+                                className="px-14 py-2 border bg-background text-white uppercase transition-transform transform hover:scale-105"
                             >
                                 pay
                             </button>
