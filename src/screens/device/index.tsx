@@ -24,6 +24,7 @@ const DeviceInfoPage: FC<DeviceInfoPageProps> = ({ params }) => {
     const router = useRouter();
 
     const [price, setPrice] = useState<number>();
+    const [imageError, setImageError] = useState(false);
     const [selectedStorage, setSelectedStorage] = useState<string>();
     const [selectedColor, setSelectedColor] = useState<DeviceColorOption>();
 
@@ -110,17 +111,17 @@ const DeviceInfoPage: FC<DeviceInfoPageProps> = ({ params }) => {
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-10 sm:px-20">
                     <div className="flex justify-center">
-                        {selectedColor ? (
+                        {selectedColor && !imageError ? (
 
-                            <div className="relative w-[400] h-[400]">
+                            <div className="relative w-[400px] h-[400px]">
                                 <Image
                                     src={selectedColor.imageUrl}
                                     alt={device.name}
                                     fill
                                     priority
-                                    //sizes="(max-width: 768px) 100px, 150px"
+                                    sizes="(max-width: 768px) 100px, 150px"
                                     className="object-contain"
-                                    onError={() => console.error('que pasa')}
+                                    onError={() => setImageError(true)}
                                 />
                             </div>
                         ) : (
