@@ -23,8 +23,11 @@ const HomePage: FC = () => {
         resetOffset();
     };
 
+    const isPreviousDisabled = offset === 0;
+    const isNextDisabled = devices.length < 20;
+
     return (
-        <div className="container mx-auto px-4 flex flex-col h-[calc(100vh-64px)]">
+        <div className="p-4 md:px-8 lg:px-12 flex flex-col h-[calc(100vh-64px)]">
             <SearchBar
                 value={searchQuery}
                 onChange={handleSearch}
@@ -52,15 +55,15 @@ const HomePage: FC = () => {
                 <div className="container mx-auto px-4 flex justify-center gap-2">
                     <button
                         onClick={handlePrevious}
-                        disabled={offset === 0}
-                        className="px-4 py-2 border rounded-lg bg-background text-foreground disabled:opacity-50"
+                        disabled={isPreviousDisabled}
+                        className={`px-4 py-2 border bg-background text-foreground disabled:opacity-50 transition-transform transform ${isPreviousDisabled ? '' : 'hover:scale-105'}`}
                     >
                         Previous
                     </button>
                     <button
                         onClick={handleNext}
-                        disabled={devices.length < 20}
-                        className="px-4 py-2 border rounded-lg bg-background text-foreground disabled:opacity-50"
+                        disabled={isNextDisabled}
+                        className={`px-4 py-2 border bg-background text-foreground disabled:opacity-50 transition-transform transform ${isNextDisabled ? '' : 'hover:scale-105'}`}
                     >
                         Next
                     </button>
