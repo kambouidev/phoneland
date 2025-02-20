@@ -109,6 +109,7 @@ const DeviceInfoPage: FC<DeviceInfoPageProps> = ({ params }) => {
 
                     <div>
                         <div>
+                            <span className="font-normal uppercase">{device.brand}</span>
                             <h1 className="text-3xl font-bold uppercase">{device.name}</h1>
                             <p className="text-lg text-gray-600 uppercase">from {price} EUR</p>
                         </div>
