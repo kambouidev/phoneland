@@ -25,20 +25,21 @@ export const DeviceCard = ({ id, basePrice, brand, imageUrl, name }: IDevice) =>
             onClick={handleClick}
             className="flex flex-col h-full border relative group overflow-hidden cursor-pointer"
         >
-            <div className="absolute inset-0 bg-black transform translate-y-full transition-transform duration-300 ease-in-out group-hover:translate-y-0 -z-10" />
+            <div className="absolute inset-0 md:bg-black md:transform md:translate-y-full md:transition-transform md:duration-300 md:ease-in-out md:group-hover:translate-y-0 -z-10" />
 
             <div className="flex-1 flex items-center justify-center p-2 relative">
-                {!imageError ? (<div className="relative w-[150px] h-[150px]">
-                    <Image
-                        src={imageUrl}
-                        alt={name}
-                        fill
-                        priority
-                        sizes="(max-width: 768px) 100px, 150px"
-                        className="object-contain"
-                        onError={() => setImageError(true)}
-                    />
-                </div>
+                {!imageError ? (
+                    <div className="relative w-[150px] h-[150px]">
+                        <Image
+                            src={imageUrl}
+                            alt={name}
+                            fill
+                            priority
+                            sizes="(max-width: 768px) 100px, 150px"
+                            className="object-contain"
+                            onError={() => setImageError(true)}
+                        />
+                    </div>
                 ) : (
                     <DevicePlaceholder />
                 )}
@@ -46,11 +47,11 @@ export const DeviceCard = ({ id, basePrice, brand, imageUrl, name }: IDevice) =>
 
             <div className="flex items-end justify-between p-2 relative">
                 <div className="flex flex-col">
-                    <span className="text-xs  font-extralight text-gray-500 uppercase transition-colors group-hover:text-white">{brand}</span>
-                    <span className="text-xs  font-extralight truncate uppercase transition-colors group-hover:text-white">{name}</span>
+                    <span className="text-xs font-extralight text-gray-500 uppercase transition-colors md:group-hover:text-white">{brand}</span>
+                    <span className="text-xs font-extralight truncate uppercase transition-colors md:group-hover:text-white">{name}</span>
                 </div>
                 <div>
-                    <span className="text-xs font-extralight uppercase transition-colors group-hover:text-white">
+                    <span className="text-xs font-extralight uppercase transition-colors md:group-hover:text-white">
                         {formatPrice(basePrice)}
                     </span>
                 </div>
