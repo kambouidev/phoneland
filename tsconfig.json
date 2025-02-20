@@ -22,7 +22,9 @@
       "@/*": ["./src/*"],
       "@screens/*": ["./src/screens/*"],
       "@providers/*": ["./src/providers/*"],
-      "@globalHooks/*": ["./src/hooks/*"]
+      "@globalHooks/*": ["./src/hooks/*"],
+      "@components/*": ["./src/components/*"],
+      "@context/*": ["./src/context/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
