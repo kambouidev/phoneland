@@ -4,7 +4,8 @@ import { useDevices } from "./hooks/useDevices";
 import { usePagination } from "./hooks/usePagination";
 import { useSearch } from "./hooks/useSearch";
 import { SearchBar } from "./components/SearchBar";
-import { DeviceCard } from "./components/DeviceCard";
+import DeviceGrid from "./components/DeviceGrid";
+import HomeFooter from "./components/HomeFooter";
 
 const HomePage: FC = () => {
     const { offset, handleNext, handlePrevious, resetOffset } = usePagination();
@@ -41,34 +42,15 @@ const HomePage: FC = () => {
             </div>
 
             <div className="flex-1 overflow-y-auto mb-20 scrollbar-transparent">
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-                    {devices.map((device, index) => (
-                        <DeviceCard
-                            key={`${device.id}-${index}`}
-                            {...device}
-                        />
-                    ))}
-                </div>
+                <DeviceGrid devices={devices} />
             </div>
 
-            <footer className="fixed bottom-0 left-0 right-0 bg-background border-t py-4">
-                <div className="container mx-auto px-4 flex justify-center gap-2">
-                    <button
-                        onClick={handlePrevious}
-                        disabled={isPreviousDisabled}
-                        className={`px-4 py-2 border bg-background text-foreground disabled:opacity-50 transition-transform transform ${isPreviousDisabled ? '' : 'hover:scale-105'}`}
-                    >
-                        Previous
-                    </button>
-                    <button
-                        onClick={handleNext}
-                        disabled={isNextDisabled}
-                        className={`px-4 py-2 border bg-background text-foreground disabled:opacity-50 transition-transform transform ${isNextDisabled ? '' : 'hover:scale-105'}`}
-                    >
-                        Next
-                    </button>
-                </div>
-            </footer>
+            <HomeFooter
+                handlePrevious={handlePrevious}
+                handleNext={handleNext}
+                isPreviousDisabled={isPreviousDisabled}
+                isNextDisabled={isNextDisabled}
+            />
         </div>
     );
 };
