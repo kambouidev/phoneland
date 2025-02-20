@@ -1,5 +1,5 @@
 "use client"
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { notFound } from "next/navigation";
 import { useGetDeviceDetails } from "./hooks/useGetDeviceDetails";
@@ -57,6 +57,25 @@ const DeviceInfoPage: FC<DeviceInfoPageProps> = ({ params }) => {
         router.push('/cart');
     }
 
+
+
+    const isAddToCartDisabled = !selectedStorage || !selectedColor;
+    const renderSimilarDevices = useMemo(() => {
+        if (!device) return <></>
+        return (
+            <div className="mt-8 pl-10 sm:pl-20">
+                <h2 className="text-2xl font-semibold uppercase">similar items</h2>
+                <div className="flex overflow-x-auto mt-4 scrollbar-custom pb-12">
+                    {device.similarProducts.map((product, index) => (
+                        <div key={`${device.id}-${index}`} className="w-72 h-72 flex-shrink-0">
+                            <DeviceCard {...product} />
+                        </div>
+                    ))}
+                </div>
+            </div>
+        )
+    }, [device])
+
     if (isLoading) {
         return <Loading />;
     }
@@ -64,9 +83,6 @@ const DeviceInfoPage: FC<DeviceInfoPageProps> = ({ params }) => {
     if (error || !device) {
         notFound();
     }
-
-    const isAddToCartDisabled = !selectedStorage || !selectedColor;
-
     return (
         <div className="w-full">
             <div className="flex-1 overflow-y-auto pb-12 h-[calc(100vh-64px)] scrollbar-transparent">
@@ -102,8 +118,9 @@ const DeviceInfoPage: FC<DeviceInfoPageProps> = ({ params }) => {
                                     alt={device.name}
                                     fill
                                     priority
-                                    sizes="(max-width: 768px) 100px, 150px"
+                                    //sizes="(max-width: 768px) 100px, 150px"
                                     className="object-contain"
+                                    onError={() => console.error('que pasa')}
                                 />
                             </div>
                         ) : (
@@ -168,16 +185,7 @@ const DeviceInfoPage: FC<DeviceInfoPageProps> = ({ params }) => {
                     </div>
                 </div>
 
-                <div className="mt-8 pl-10 sm:pl-20">
-                    <h2 className="text-2xl font-semibold uppercase">similar items</h2>
-                    <div className="flex overflow-x-auto mt-4 scrollbar-custom pb-12">
-                        {device.similarProducts.map((product, index) => (
-                            <div key={`${device.id}-${index}`} className="w-72 h-72 flex-shrink-0">
-                                <DeviceCard {...product} />
-                            </div>
-                        ))}
-                    </div>
-                </div>
+                {device && renderSimilarDevices}
             </div>
         </div>
     );
