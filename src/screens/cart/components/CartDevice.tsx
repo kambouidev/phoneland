@@ -21,7 +21,7 @@ export const CartDevice: React.FC<CartDeviceProps> = ({ device, handleDelete }) 
 
     return (
         <div className="flex flex-row border cursor-pointer">
-            <div className="flex-1 flex items-center justify-center">
+            <div className="flex-1 flex items-center justify-center p-2">
                 {!imageError ? (
                     <Image
                         src={device.imageUrl}
