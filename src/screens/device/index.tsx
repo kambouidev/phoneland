@@ -3,11 +3,12 @@ import { FC, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { notFound } from "next/navigation";
 import { useGetDeviceDetails } from "./hooks/useGetDeviceDetails";
-import { DevicePlaceholder } from "../../components/icons/DevicePlaceholder";
+import { DevicePlaceholder } from "@components/icons/DevicePlaceholder";
 import Image from "next/image";
 import { DeviceCard } from "../home/components/DeviceCard";
-import { DeviceStorageOption } from "../../types";
-import { useCart } from "../../context/CartContext";
+import { DeviceStorageOption, DeviceColorOption } from "@/types";
+import { useCart } from "@context/CartContext";
+import Loading from "@components/Loading";
 
 interface DeviceInfoPageProps {
     params: {
@@ -24,12 +25,12 @@ const DeviceInfoPage: FC<DeviceInfoPageProps> = ({ params }) => {
 
     const [price, setPrice] = useState<number>();
     const [selectedStorage, setSelectedStorage] = useState<string>();
-    const [selectedColor, setSelectedColor] = useState<string>();
+    const [selectedColor, setSelectedColor] = useState<DeviceColorOption>();
 
     useEffect(() => {
         if (device) {
             setPrice(device.basePrice);
-            setSelectedColor(device.colorOptions[0].imageUrl);
+            setSelectedColor(device.colorOptions[0]);
         }
     }, [device]);
 
@@ -38,25 +39,26 @@ const DeviceInfoPage: FC<DeviceInfoPageProps> = ({ params }) => {
         setPrice(option.price);
     };
 
-    const handleColorSelect = (imageUrl: string) => {
-        setSelectedColor(imageUrl);
+    const handleColorSelect = (option: DeviceColorOption) => {
+        setSelectedColor(option);
     };
 
     const handleAddToCart = () => {
         if (!device || !selectedColor || !selectedStorage || price === undefined) return;
         addToCart({
             brand: device.brand,
-            colorName: 'red',
-            id: device.id,
-            imageUrl: selectedColor,
+            colorName: selectedColor.name,
+            id: `${device.id}-${Date.now()}`,
+            imageUrl: selectedColor.imageUrl,
             name: device.name,
             price,
             storage: selectedStorage
-        })
+        });
+        router.push('/cart');
     }
 
     if (isLoading) {
-        return <div>Cargando...</div>;
+        return <Loading />;
     }
 
     if (error || !device) {
@@ -94,7 +96,7 @@ const DeviceInfoPage: FC<DeviceInfoPageProps> = ({ params }) => {
                     <div className="flex justify-center">
                         {selectedColor ? (
                             <Image
-                                src={selectedColor}
+                                src={selectedColor.imageUrl}
                                 alt={device.name}
                                 width={400}
                                 height={400}
@@ -107,7 +109,7 @@ const DeviceInfoPage: FC<DeviceInfoPageProps> = ({ params }) => {
 
                     <div>
                         <div>
-                            <h1 className="text-3xl font-bold">{device.name}</h1>
+                            <h1 className="text-3xl font-bold uppercase">{device.name}</h1>
                             <p className="text-lg text-gray-600 uppercase">from {price} EUR</p>
                         </div>
 
@@ -118,7 +120,7 @@ const DeviceInfoPage: FC<DeviceInfoPageProps> = ({ params }) => {
                                     <button
                                         key={option.capacity}
                                         onClick={() => handleStorageSelect(option)}
-                                        className={`border p-4 ${selectedStorage === option.capacity ? 'ring-2 ring-black' : ''}`}
+                                        className={`border p-4 transition-transform transform hover:scale-105 ${selectedStorage === option.capacity ? 'ring-2 ring-black' : ''}`}
                                     >
                                         {option.capacity}
                                     </button>
@@ -129,19 +131,19 @@ const DeviceInfoPage: FC<DeviceInfoPageProps> = ({ params }) => {
                         <div className="mt-4">
                             <h3 className="font-semibold">color, pick your favorite color.</h3>
                             <div className="flex gap-8 mt-2">
-                                {device.colorOptions.map((color) => (
+                                {device.colorOptions.map((option) => (
                                     <button
-                                        key={color.name}
-                                        onClick={() => handleColorSelect(color.imageUrl)}
-                                        style={{ backgroundColor: color.hexCode }}
-                                        className={`w-8 h-8 border ${selectedColor === color.imageUrl ? 'ring-2 ring-black' : ''}`}
+                                        key={option.name}
+                                        onClick={() => handleColorSelect(option)}
+                                        style={{ backgroundColor: option.hexCode }}
+                                        className={`w-8 h-8 border transition-transform transform hover:scale-105 ${selectedColor?.hexCode === option.hexCode ? 'ring-2 ring-black' : ''}`}
                                     />
                                 ))}
                             </div>
                         </div>
 
                         <button
-                            className={`mt-6 w-full py-2 uppercase text-white ${isAddToCartDisabled ? 'bg-gray-400 cursor-not-allowed' : 'bg-black'}`}
+                            className={`mt-6 w-full py-2 uppercase text-white transition-transform transform ${isAddToCartDisabled ? 'bg-gray-400 cursor-not-allowed' : 'bg-black hover:scale-105'}`}
                             disabled={isAddToCartDisabled}
                             onClick={handleAddToCart}
                         >
