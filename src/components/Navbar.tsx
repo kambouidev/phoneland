@@ -14,7 +14,7 @@ export default function Navbar() {
                         </span>
                     </Link>
 
-                    <Link href="/cart" className="flex items-center transition-transform transform hover:scale-105">
+                    <Link href="/cart" className="flex items-center transition-transform transform hover:scale-105" data-cy="navbar-cart-link">
                         <div className="relative">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -30,7 +30,7 @@ export default function Navbar() {
                                     d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
                                 />
                             </svg>
-                            <span className="absolute -top-2 -right-2 bg-gray-500 text-white rounded-full h-5 w-5 flex items-center justify-center text-xs">
+                            <span className="absolute -top-2 -right-2 bg-gray-500 text-white rounded-full h-5 w-5 flex items-center justify-center text-xs" data-cy="navbar-cart-count">
                                 {cart.length}
                             </span>
                         </div>
