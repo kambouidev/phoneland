@@ -1,6 +1,7 @@
 "use client"
 import { useEffect, useState } from 'react';
 import DeviceInfoPage from '@/screens/device';
+import Loading from '@components/Loading';
 
 interface PhoneProps {
     params: Promise<{ id: string }>;
@@ -16,7 +17,7 @@ export default function DeviceDetailsPage({ params }: PhoneProps) {
     }, [params]);
 
     if (!resolvedParams) {
-        return <div>Loading...</div>;
+        return <Loading />;
     }
 
     return <DeviceInfoPage params={resolvedParams} />;
