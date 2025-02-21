@@ -2,8 +2,23 @@
 
 Phoneland is a web application developed with Next.js that allows users to explore and purchase mobile devices. The application offers an intuitive interface to search, filter, and view details of various devices, as well as add products to the shopping cart and proceed with the purchase.
 
+### 📑 Table of Contents  
 
-## Project Architecture and Structure
+1. [📂 Project Architecture and Structure](#📂-project-architecture-and-structure)  
+2. [⭐ Key Features](#⭐-key-features)  
+3. [🔧 Technologies Used](#🔧-technologies-used)  
+4. [⬇️ How to Download and Install](#⬇️-how-to-download-and-install)  
+5. [🚀 Development and Production Modes](#🚀-development-and-production-modes)  
+5. [⚙️ Next.js Configuration](#⚙️-nextjs-configuration)  
+6. [🛍️ Shopping Cart Context](#🛍️-shopping-cart-context)  
+7. [🏗️ Reusable Components](#🏗️-reusable-components)  
+8. [🔄 Custom Hooks](#🔄-custom-hooks)  
+9. [🧪 Testing](#-testing)  
+    - [📌 How to Run the Tests](#-how-to-run-the-tests)  
+    - [📂 Test Structure](#-test-structure)  
+
+
+## 📂 Project Architecture and Structure
 
 The architecture of Phoneland follows the Next.js design pattern, using both the `pages` folder and the `app` folder to organize the application's routes and components. The project structure is organized as follows:
 
@@ -17,14 +32,14 @@ The architecture of Phoneland follows the Next.js design pattern, using both the
   - **`/types`**: TypeScript type definitions used throughout the application.
 
 
-## Key Features
+## ⭐ Key Features
 
 - **Search and Filter**: Users can search and filter mobile devices based on various criteria.
 - **Device Details**: Users can view full details of each device, including specifications, storage options, and available colors.
 - **Shopping Cart**: Users can add devices to the shopping cart and proceed with the purchase.
 - **Cart Persistence**: The cart state is saved in `localStorage` for persistence across sessions.
 
-## Technologies Used
+## 🔧 Technologies Used
 
 - **Next.js**: React framework for web applications.
 - **React**: JavaScript library for building user interfaces.
@@ -32,7 +47,7 @@ The architecture of Phoneland follows the Next.js design pattern, using both the
 - **Tailwind CSS**: CSS framework for fast and efficient design.
 - **Vercel**: Deployment platform for web applications.
 
-## How to Download and Install
+## ⬇️ How to Download and Install
 
 To get started with Phoneland, follow these steps:
 
@@ -78,27 +93,70 @@ To get started with Phoneland, follow these steps:
 
    The application will be available at [http://localhost:3000](http://localhost:3000).
 
-### Development and Production Modes
+## 🚀 Development and Production Modes
 
 The application includes two modes of execution:
 
-- **🚀 Development Mode**: Assets are served without minimization to facilitate debugging and development.
+- **🚧 Development Mode**: Assets are served without minimization to facilitate debugging and development.
   
 - **⚡ Production Mode**: Assets are served concatenated and minimized to improve performance.
 
-## Next.js Configuration  
+## ⚙️ Next.js Configuration  
 The `next.config.ts` file contains the Next.js configuration, including Webpack optimization for **development** and **production** modes.  
 The image configuration allows loading images from a remote URL specified in the `NEXT_PUBLIC_BASE_URL` environment variable.
 
-## Shopping Cart Context  
+## 🛍️ Shopping Cart Context  
 The shopping cart context (`CartContext`) manages the global state of the cart, allowing users to **add and remove devices** from the cart.  
 The cart state is saved in `localStorage` for **persistence across sessions**.
 
-## Reusable Components  
+## 🏗️ Reusable Components  
 The application uses several **reusable components** to improve **modularity** and **maintainability** of the code.  
 For example, the `Loading` component is used to display a **loading indicator** in various parts of the application.
 
-## Custom Hooks  
+## 🔄 Custom Hooks  
 **Custom hooks** encapsulate reusable logic, such as:  
 - `useGetDeviceDetails`: Fetches the details of a device.  
 - `usePagination`: Handles pagination of devices.
+
+## 🧪 Testing  
+
+Phoneland uses **Cypress** for end-to-end (E2E) testing. Cypress allows testing the application in a real-world environment and detecting potential issues in the user experience.  
+
+### 📌 How to Run the Tests  
+
+#### 🚀 Prerequisites for Running Tests  
+
+Before running the tests, make sure the development environment is up and running. To start the local server, use:  
+
+```bash
+npm run dev
+```  
+
+Once the server is running at `http://localhost:3000`, you can proceed with test execution.  
+
+#### 1️⃣ **Open the Cypress Interface**  
+To run tests interactively using the graphical interface, use:  
+
+```bash
+npm run cypress:open
+```  
+
+This will open the **Cypress Test Runner**, where you can select a browser and run the tests visually.  
+
+#### 2️⃣ **Run Tests in Headless Mode**  
+To execute tests without opening the graphical interface (ideal for CI/CD), use:  
+
+```bash
+npm run cypress:run
+```  
+
+This will run all tests in the background and display the results in the terminal.  
+If the server is not running, the tests will not execute properly.  
+
+### 📂 Test Structure  
+
+Cypress tests are located in the `cypress/e2e/` folder, organized by key application functionalities:  
+
+- **`cypress/e2e/homePage.cy.ts`** → Tests for the home page (search, filters, navigation).  
+- **`cypress/e2e/deviceInfoPage.cy.ts`** → Tests for the device details page (color selection, storage, pricing).  
+- **`cypress/e2e/cartPage.cy.ts`** → Tests for the shopping cart (adding/removing products, persistence).  
